@@ -2,14 +2,9 @@ class MurderStatsManager():
     def __init__(self):
         self.data = {}
     def add_data(self, continent, country, city, count):
-        for path, value in self.data.items():
-            if path == continent:        
-                for path2 , value2 in value.items():
-                    if path2 == country: 
-                        for path3 , value3 in value2.items():
-                            if path3 == city:
-                                value2[path3] = count  
-                                return
+        if continent in self.data and country in self.data[continent] and city in self.data[continent][country]:
+            self.data[continent][country][city] = count
+                                
     def get_stats(self):
         for path, value in self.data.items():
             print(path)
