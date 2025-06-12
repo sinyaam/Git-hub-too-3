@@ -15,8 +15,10 @@ class ExtendedMurderStatsManager(MurderStatsManager):
                 if city in self.data[continent][country]:
                     del self.data[continent][country][city]
                     print(f"{city} удалён.")
-stats2 =    
-data = {
+   
+
+stats_manager = MurderStatsManager()
+stats_manager.data = {
     "Europe": {
         "Estonia": {
             "Tallinn": 5
@@ -29,7 +31,35 @@ data = {
         "Japan": {
             "Tokyo": 8
         }
-    },  
+    }
+}
+
+
+print("Текущие данные:")
+stats_manager.get_stats()
+
+
+stats_manager.add_data("Europe", "Finland", "Helsinki", 4)
+print("\nПосле обновления данных (Helsinki -> 4):")
+stats_manager.get_stats()
+
+
+print("\nТестирование ExtendedMurderStatsManager:")
+extended_stats_manager = ExtendedMurderStatsManager()
+extended_stats_manager.data = {
+    "Europe": {
+        "Estonia": {
+            "Tallinn": 5
+        },
+        "Finland": {
+            "Helsinki": 3
+        }
+    },
+    "Asia": {
+        "Japan": {
+            "Tokyo": 8
+        }
+    },
     "Africa": {
         "Nigeria": {
             "Lagos": 7
@@ -43,4 +73,15 @@ data = {
     }
 }
 
-    
+
+print("Текущие данные:")
+extended_stats_manager.get_stats()
+
+
+city_stats = extended_stats_manager.get_city_stats("Africa", "Egypt", "Cairo")
+print(f"\nСтатистика для города Cairo: {city_stats}")
+
+
+extended_stats_manager.remove_city("Africa", "Egypt", "Cairo")
+print("\nПосле удаления города Cairo:")
+extended_stats_manager.get_stats()
